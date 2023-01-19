@@ -1,0 +1,22 @@
+========================================================================
+Caption Editor
+========================================================================
+
+SUMMARY:
+The Caption Editor is a graphical user interface to modify the 'captions.ini' found inside the
+'mapper' folder.
+
+ADDING CAPTIONS
+Fill in all of the fields below
+
+'Zone ID' = Zone number (must a number).
+'X Coord' = Must be a valid DAoC coordinate (range 0-65535).
+'Y Coord' = Must be a valid DAoC coordinate (range 0-65535).
+'Caption' = This is the caption that is displayed on the map.
+
+Once these have been filled in click on 'Add >>>' and thats it, next time you render that
+zone the caption will appear at those coordinates.
+
+NEW FEATURES
+To update a previously entered caption, double click on it in the captions pane, this will
+then populate the fields below, make changes then click 'Update >>>'.

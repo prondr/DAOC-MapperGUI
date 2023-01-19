@@ -1,0 +1,270 @@
+Version 2.4:
+
+2004-08-17  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+	
+	* mapper/default.ini, mapper/mapper.py, mapper/captions.ini,
+	settings.map: bringing up to date with mapper 2.4
+
+	* MapperGUI.pyw: Changed version to 2.4 (live)
+
+	* modules/createIni.py: Added some more groves to ini-file generator.
+
+Version 2.3.4beta:
+	
+2004-08-11  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/ContourRender.py, mapper/FixtureRender.py,
+	mapper/GroveRender.py, mapper/NIFToPoly.py, mapper/RiverRender.py,
+	mapper/Tiler.py, mapper/Util.py, mapper/Zone.py, mapper/mapper.py:
+	sync with mapper-base
+
+2004-08-10  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/FixtureRender.py: revert to mapper-base version
+
+2004-08-09  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/FixtureRender.py: sync to mapper-base
+
+2004-08-08  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/FixtureRender.py: sync with mapper-base
+
+2004-08-06  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/ContourRender.py, mapper/FixtureRender.py,
+	mapper/GroveRender.py, mapper/NIFToPoly.py, mapper/RiverRender.py,
+	mapper/Tiler.py, mapper/Util.py, mapper/Zone.py,
+	mapper/all_locations.txt, mapper/mapper.py: Bring into sync with
+	mapper-base
+
+	* MapperGUI.pyw: commented out rest of misc menu
+
+	* MapperGUI.pyw: commented out old BGs in menu
+
+2004-08-05  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* modules/createIni.py:
+	Only adds byline entries if bylineOnOff (pref[30]) is on.
+
+	* settings.map:
+	New settings file has byline on/off and byline values added.
+
+	* MapperGUI.pyw: Started adding docstrings.
+	Split up mainApplication.__init__ into __init__,
+	initMenu,initThumbnail & initRenderOptions
+	Added byline on/off toggle and byline entry field to GUI.
+
+	* modules/tkinterAboutBox.py: Started adding docstrings
+
+	* modules/tkinterAboutBox.py: Added Id and Log tags
+	Opens on top now (z-axis)
+
+	* modules/helpViewer.py: Enabled close button on frame.
+	Added $Id: ChangeLog,v 1.4 2004/08/18 21:48:06 cyhiggin Exp $ and $Log: ChangeLog,v $
+	Added $Id$ and Revision 1.4  2004/08/18 21:48:06  cyhiggin
+	Added $Id$ and Updated ChangeLog for 2.4 release.
+	Added $Id$ and tags.
+	Opens on top.
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/ContourRender.py, mapper/FixtureRender.py,
+	mapper/GroveRender.py, mapper/NIFToPoly.py, mapper/RiverRender.py,
+	mapper/Tiler.py, mapper/Util.py, mapper/Zone.py, mapper/mapper.py:
+	Up-to-date with mapper-base
+
+	* modules/createIni.py: Added defaulttree entry to draw.trees
+
+2004-08-04  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* modules/createIni.py: Added more Atlantean trees to list
+
+	* modules/createIni.py: Fixed indentation
+
+	* modules/createIni.py: fixed indent of docstring
+
+	* MapperGUI.pyw: version is now 2.3.4b
+
+	* modules/createIni.py:
+	Only add 2nd structure render if we render rivers.
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/ContourRender.py, mapper/FixtureRender.py,
+	mapper/GroveRender.py, mapper/NIFToPoly.py, mapper/RiverRender.py,
+	mapper/Tiler.py, mapper/Util.py, mapper/Zone.py, mapper/mapper.py:
+	bringing up-to-date with mapper-base
+
+Version 2.3.3beta:
+	
+2004-08-02  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* modules/createIni.py: Started adding proper docstrings
+	Added 2nd structure render after rivers, to catch waterline
+	structures.
+
+2004-07-28  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/FixtureRender.py, mapper/GroveRender.py,
+	mapper/NIFToPoly.py, mapper/Zone.py, mapper/mapper.py: brought up
+	to date with mapper-base changes
+
+	* modules/createIni.py:
+	Changed render order: rivers to render after structures, trees, groves.
+
+	* MapperGUI.pyw: Updated version to 2.3.3b.
+
+	* modules/captionEditor.py: Hopefully fixed z-axis issue in Windows
+
+	* modules/tkinterAboutBox.py:
+	Hopefully fixed z-axis problem in Windows.
+
+2004-07-20  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/BackgroundRender.py, mapper/mapper.py:
+	Bringing up to speed with mapper-base
+
+2004-06-17  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/captions.ini: sparse captions for distro
+
+	* mapper/ChangeLog-mapper: ChangeLog from mapper-base
+
+	* ChangeLog: Updated for 2.3.1 changes
+
+	* mapper/Zone.py: Bringing in line with mapper-base updates
+
+	* MapperGUI.pyw: Updated version tag
+
+Version 2.3.1:
+	
+2004-06-17  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/Zone.py: Bringing in line with mapper-base updates
+
+	* MapperGUI.pyw: Updated version tag
+
+2004-06-12  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/BackgroundRender.py: Merged updates to mapper-base
+
+	* mapper/mapper.py: Updated patch level to 2.3.1
+
+2004-06-08  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/ChangeLog-mapper: Changelog for mapper-base changes
+
+	* ChangeLog: version 2.3 changelog
+
+Version 2.3:
+	
+2004-06-03  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/GroveRender.py: adding grove renderer as per mapper-base
+
+2004-05-28  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/FixtureRender.py, mapper/NIFToPoly.py, mapper/Zone.py,
+	mapper/all_locations.txt, mapper/captions.ini, mapper/default.ini,
+	mapper/everything.ini, mapper/mapper.py, modules/createIni.py,
+	ChangeLog, settings.map: bringing mapper-base mods into tree
+
+2004-05-26  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* MapperGUI.pyw: Added new battlegrounds to Frontiers region;
+	increased resolution limits.
+
+	* mapper/FixtureRender.py, mapper/Zone.py, mapper/mapper.py:
+	Integrated updates to mapper-base
+
+2004-04-20  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/_dxt1.dll, mapper/_dxt1.so: Added current shared libs so
+	as to checkout complete ready-to-distribute version.
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/FixtureRender.py, mapper/NIFToPoly.py, mapper/Zone.py,
+	mapper/all_locations.txt, mapper/captions.ini, mapper/mapper.py,
+	settings.map: Catching up 2.2 changes from mapper-base
+
+Version 2.2:
+
+2004-04-20  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper/_dxt1.dll, mapper/_dxt1.so: Added current shared libs so
+	as to checkout complete ready-to-distribute version.
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/FixtureRender.py, mapper/NIFToPoly.py, mapper/Zone.py,
+	mapper/all_locations.txt, mapper/captions.ini, mapper/mapper.py,
+	settings.map: Catching up 2.2 changes from mapper-base
+
+2004-04-16  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* modules/createIni.py: Added new ini option to bounds: fill=0|1
+
+	* COPYING, CREDITS, GPL20.txt, MapperGUI.pyw, run_mappergui,
+	settings.map: Added fill/no-fill option to boundary shading.
+
+	* MapperGUI.pyw: Added new save file types: PNG, GIF.
+
+	* MapperGUI.pyw: Determine which menu each zone goes under by
+	region, not zone now.  Added Frontiers menu, moved all New
+	Frontiers zones there. Left old Battlefields under misc.
+
+	* modules/zones.py: Added region to zones tuple.
+
+Version 2.1:
+	
+2004-04-06  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* settings.map: changed a few colors
+
+	* mapper/captions.ini: more captions
+
+2004-04-04  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* modules/createIni.py: added reedclump1=tree
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/FixtureRender.py, mapper/NIFToPoly.py, mapper/Zone.py,
+	mapper/dempak.py, mapper/mapper.py: incorporated fixes and changes
+	from mapper-base
+
+2004-04-03  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* modules/createIni.py:
+	Added Atlantean trees and corals to ini-file as trees.
+
+	* mapper/BackgroundRender.py, mapper/BoundsRender.py,
+	mapper/FixtureRender.py, mapper/NIFToPoly.py, mapper/Util.py,
+	mapper/Zone.py, mapper/dxt1-decoder.c, mapper/glue.py,
+	mapper/mapper.py: Incorporated mapper-base changes.
+
+	* MapperGUI.pyw: Changed version to 2.1
+
+Version 2.0:
+	
+2004-03-15  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* MapperGUI.pyw, mapper/BackgroundRender.py,
+	mapper/FixtureRender.py, mapper/NIFToPoly.py, mapper/Zone.py,
+	mapper/mapper.py: Modifications to MapperGUI and mapper modules to
+	search for housing zones correctly.
+
+	* modules/zones.py:
+	Changed Zones.__init__ to only list type 1 & 3 zones.
+
+	* MapperGUI.pyw: Fixed TypeError:unsubscriptable object in
+	hexToRgb by enclosing hexNumber in str().
+
+	* mapper/FixtureRender.py, mapper/NIFToPoly.py: fixes from
+	mapper-base
+
+
+
+
+

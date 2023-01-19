@@ -1,0 +1,54 @@
+========================================================================
+MapperGUI v1.6
+========================================================================
+
+SUMMARY:
+DAoC MapperGUI is a graphical user interface to 'Oliver Jowett's DAoC mapper.py',
+a Dark Age of Camelot mapping program. The core mapper program written by Oliver
+Jowett scans the game files installed on your drive and dynamically renders an image.
+
+STARTING UP:
+When the program is started for the first time the 'DAoC Game Path' will probably be
+wrong for your PC. The 'DAoC Game Path' line should point directly at the folder you
+have installed Dark Age of Camelot to. Once you have done this quit and restart
+MapperGUI to create the 'Zone' menu.
+
+THE MAIN WINDOW:
+First select a zone from the 'Zone' menu, then tweak the 'Render options' to suit your
+preference of map colours and transparencies(Alpha), and toggle on and off what you
+wish to be drawn. You can then click the 'Render' button and it will start rendering.
+Once this has  finished it will display the newly created image in the preview pane.
+Once an image has been rendered it is available to be saved either by clicking the
+'Save Image...' button or by selecting 'Save...' in the 'File' menu.
+
+FILE MENU:
+Save = Save a rendered image
+Exit = Exit MapperGUI
+
+ZONE MENU:
+This is randomly generated depending what version of Dark Age of Camelot you have
+installed. You select which zone to render from here.
+
+OPTIONS MENU:
+'OneClick' Captioning = Turn on one click captioning. Once this has been turned on you
+can single click anywhere on a rendered map then the caption editor will appear with all
+zone and coordinate information all ready entered, all you need to do is specifiy a caption
+and then re-render.
+Open Caption Editor = Opens the Caption Editor
+Help = Your reading it!
+About = General info
+
+KNOWN ISSUES
+Current MapperGUI does not render any Cities or Dungeons.  :(
+
+========================================================================
+
+MapperGUI:
+Copyright (c) 2002, G. Willoughby <sab@freeuk.com> All rights reserved.
+
+Dark Age of Camelot:
+Copyright (c) 2001, Mythic Entertainment, Inc. All rights reserved. Mythic Entertainment, the
+Mythic Entertainment logo, "Dark Age of Camelot", the Dark Age of Camelot logo, stylized
+Celtic knot and "Live the Legend" are trademarks of Mythic Entertainment, Inc. Abandon
+Entertainment and the Abandon Entertainment logo are trademarks of Abandon
+Entertainment, Inc.

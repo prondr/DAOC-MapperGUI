@@ -1,0 +1,7 @@
+#
+# start MapperGui with python
+#
+MAPPERGUI_DIR=/home/cynthia/programming/mapper/MapperGUI
+cd $MAPPERGUI_DIR
+/usr/bin/python MapperGUI.pyw &
+

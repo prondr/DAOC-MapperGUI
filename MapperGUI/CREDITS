@@ -1,0 +1,29 @@
+AUTHORS:
+
+Original mapper.py and DDS decoding routines for SI:
+	Oliver Jowett <oliver@randomly.org>
+	http://www.randomly.org
+
+Patch to dxt-decoder.c to fix color-swap bug:
+	C J Silverio <ceej@goonsquad.spies.com>
+	http://www.ceejbot.com/DAoC/
+
+Updates to mapper.py to render housing zones and TOA zones:
+Improved border fill routines:
+	Cynthia Higginbotham <dragoness77@republicofnewhome.org>
+	http://nathrach.republicofnewhome.org
+
+Added NIF 4 decoding to NIFtoPoly.py:
+	Fabrice Marmont <fabrice.marmont@wanadoo.fr> 
+	http://perso.wanadoo.fr/isabelle.marmont/index.html
+
+Some minor tweaks and a copy of Fabrice's NIF 4 code:
+	Caviel of St. Crispin's League <caviel@warlordcentral.com>
+	http://www.warlordcentral.com/
+
+Original MapperGUI: 
+	G. Willoughby <sab@freeuk.com>
+	
+Updates to MapperGUI for SI, Housing and TOA zones:	
+	Cynthia Higginbotham <dragoness77@republicofnewhome.org>
+	http://nathrach.republicofnewhome.org

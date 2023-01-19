@@ -1,0 +1,227 @@
+Version 2.4:
+	
+2004-08-17  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper.py: updated version to 2.4 (live)
+
+	* default.ini: Put current grove/tree/decor set in default.ini
+
+Version 2.3.4beta:
+	
+2004-08-11  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* FixtureRender.py: Removed bounding box check of heights, as
+	unnecessary and adds extra calculations.
+
+2004-08-09  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* FixtureRender.py: Put check for abovewater fixtures back in.
+
+2004-08-08  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* FixtureRender.py:
+	removed check for above-water structures, and diagnostics prints
+
+2004-08-06  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* RiverRender.py, Zone.py:
+	zone.riverheight is now a list of all riverheights in the zone
+
+	* FixtureRender.py: revised water-line height check
+
+2004-08-05  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* FixtureRender.py: Added code to handle bad/missing tree NIFs. If
+	tree is missing, substitute a default tree instead.
+
+2004-08-04  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* FixtureRender.py: Commented out some diagnostic prints.
+
+2004-08-02  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* Zone.py: Added more docstrings
+
+	* ContourRender.py: Started adding proper docstrings
+
+	* FixtureRender.py: Started adding proper docstrings Added check
+	for fixtures at waterline, in 2nd pass after rivers rendered.
+
+2004-08-01  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper.py: Started adding proper docstrings
+	version now 2.3.4b
+
+	* Zone.py: Added riverdone and riverheight variables. Initialized
+	them.  Started adding proper docstrings.
+
+Version 2.3.3beta:
+	
+2004-07-31  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* Tiler.py: Added docstring, id tag.
+
+	* RiverRender.py: Started adding proper docstrings.
+	Set zone.riverdone flag when done.
+	Set zone.riverheight flag after parsing river data.
+
+	* Util.py: More of same.
+
+	* Util.py: Started adding proper docstrings.
+
+2004-07-28  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper.py: Updated version number to 2.3.3b
+
+	* BackgroundRender.py: Added texture_map lookup table; took out
+	search through textures.csv for new-style DDS file, as ocean zones
+	use small repeating tiles, other zones use one big tile.
+
+Version 2.3.2beta:
+	
+2004-07-20  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper.py: Updated version to 2.3.2
+
+	* BackgroundRender.py: Added new rendering sub-methods to handle
+	old and new-style background textures
+
+2004-06-17  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* ChangeLog: Updated for 2.3.1 release.
+
+Version 2.3.1:
+	
+2004-06-12  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* BackgroundRender.py, all_locations.txt, captions.ini:
+	Fixed flip_x bug that was affecting housing background textures.
+
+2004-06-08  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper.py: Updated patch level.
+
+	* Zone.py: Made more forgiving of parsing errors in sector.dat
+
+	* ChangeLog: Updated for 2.3 release.
+
+Version 2.3:
+2004-05-27  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* GroveRender.py: Added new function to check new tree_clusters.csv
+
+	* default.ini, everything.ini, overview.ini: updated for groves
+
+	* FixtureRender.py, GroveRender.py, default.ini, mapper.py:
+	Added GroveRender, renderer for tree clusters/groves to mapper.
+
+	
+2004-05-27  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* GroveRender.py: Added new function to check new tree_clusters.csv
+
+	* default.ini, everything.ini, overview.ini: updated for groves
+
+	* FixtureRender.py, GroveRender.py, default.ini, mapper.py: Added
+	GroveRender, renderer for tree clusters/groves to mapper.
+
+2004-05-26  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* everything.ini, overview.ini: updated to include TOA trees
+
+	* default.ini: Updated to current TOA version. Added comments on
+	huglydecor, added TOA trees.
+
+2004-05-13  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* mapper.py: Added version line.
+
+	* FixtureRender.py: Added frontiers/nifs to search path for NIFS.
+
+2004-05-11  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* Zone.py: Added New Frontiers path to possible filepaths.
+
+Version 2.2:
+	
+2004-04-16  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* BoundsRender.py:
+	read fill option to look for 0/1 int instead of yes/no string.
+
+	* BoundsRender.py: Added support for fill setting; 'yes' means
+	draw shaded poly for border, 'no' means just draw line.
+
+Version 2.1:
+
+2004-04-04  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* dempak.py:
+	added try/except for MemoryError; fix for too-large NPK files
+
+2004-04-03  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* FixtureRender.py:
+	Look for NPKs in yet more directories, like Trees/ and phousing/nifs/.
+
+2004-04-01  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* NIFToPoly.py:
+	Save poly count as unsigned long instead of unsigned short. Large
+	models such as volc_minotaur_fot.nif exceed MAXINT for an unsigned
+	short.
+
+	* FixtureRender.py:
+	Added check for uppercase filename when searching for NPK..
+
+	* everything.ini:
+	Has ini file changes for new trees and NIF4 structures
+
+	* NIFToPoly.py, Util.py, mapper.py, FixtureRender.py:
+	Merged NIF4 and path adjustments from Calien into mapper codebase
+
+2004-03-31  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* BackgroundRender.py: Changed retrieval of flip_x and flip_y from
+	config files to get, rather than stricter getboolean. As per merge
+	with Calien's code
+
+	* dxt1-decoder.c:
+	Fixed functions table so works under Python 2.3 as Windows DLL.
+
+	* glue.py: Changed to use basename of file only as map tag.
+
+	* README.txt: Fixed dxt1-decoder.c to compile under Windows.
+	Changed glue.py to only use basename for name in imagemap.
+
+Version 2.0:
+	
+2004-03-16  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* BoundsRender.py: Noted known buggy zones in comments.
+
+	* BoundsRender.py:
+	Added extra step to winnow through polygons checking for polygon sets
+	that were made contiguous by the addition of later line segments
+	(cf. Oceanus Notos).
+
+2004-03-15  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* BackgroundRender.py, Zone.py:
+	Revised Zone.filepath to not include zoneNNN directory, as is
+	different for texture file sometimes.
+
+	* BackgroundRender.py, Zone.py, mapper.py:
+	Added search for phousing zones. Added attribute 'filepath' to Zone
+	class to hold path to zone files.
+
+2004-03-14  Cynthia Higginbotham  <cyhiggin@morganeth.home>
+
+	* FixtureRender.py, NIFToPoly.py: fixtures settings improperly
+	looking for light-vector instead of light-vect, fixed. More trying
+	to find the right path.
+
+	* FixtureRender.py: corrected ReadPoly() to handle mixed case
+	names
+
+

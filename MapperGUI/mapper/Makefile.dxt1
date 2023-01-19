@@ -1,0 +1,16 @@
+# Makefile.dxt1 -- builds C helper module for DdsImageFile.py
+# See http://www.randomly.org/projects/misc/ for updates.
+#
+# _dxt1.so provides a C implementation of DXT1 texture decompression.
+# It's only used when .dds texture backgrounds are encountered. If _dxt1
+# can't be imported, DdsImageFile falls back to using a pure-Python decoder
+# which works fine but is very slow. So you probably want to build this
+# module if you can!
+
+# Configure these for your system (I should really use distutils..)
+CC      = gcc
+INCLUDE = -I/usr//include/python2.3
+CFLAGS  = -g -O2 -Wall -shared
+
+_dxt1.so: dxt1-decoder.c
+	$(CC) -o _dxt1.so ${INCLUDE} ${CFLAGS} dxt1-decoder.c
