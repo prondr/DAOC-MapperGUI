@@ -33,7 +33,8 @@
 #   light_max: color multiplier for "completely light" pixels
 
 import Tiler, Util
-import Image, ImageChops, math
+from PIL import Image, ImageChops
+import math
 import datParser as ConfigParser
 
 # As inspired by Odin's Eye.

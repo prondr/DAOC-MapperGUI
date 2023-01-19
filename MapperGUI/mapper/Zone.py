@@ -28,7 +28,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import os, Image, sys
+import os, sys
+from PIL import Image
 import dempak, Util
 import datParser as ConfigParser
 
@@ -78,7 +79,7 @@ class Zone:
             # don't you love english?
             if mode == 'greyscale' or mode == 'grayscale': self.greyscale = 1
             elif mode == 'color' or mode == 'colour': self.greyscale = 0
-            else: raise RuntimeError, 'unknown maps.mode=' + mode
+            else: raise RuntimeError('unknown maps.mode=' + mode)
         except ConfigParser.NoOptionError: self.greyscale = 0
 
         try: self.tilesize = settings.getint('maps', 'tilesize')
@@ -92,7 +93,7 @@ class Zone:
     def datafile(self, name):
         if self._csvfile:
             try: return self._csvfile.open(name)
-            except IOError, e: pass
+            except IOError as e: pass
 
         return self._datfile.open(name)
 
@@ -183,7 +184,7 @@ class Zone:
                 elif len(col) == 4:
                     pass
                 else:
-                    raise RuntimeError, 'bad color in ' + section + '.' + key + ': expected a 3-tuple or 4-tuple'
+                    raise RuntimeError('bad color in ' + section + '.' + key + ': expected a 3-tuple or 4-tuple')
             else:
                 col = default
         except ConfigParser.NoOptionError:

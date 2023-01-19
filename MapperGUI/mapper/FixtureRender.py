@@ -48,7 +48,7 @@
 
 import re, math, os, stat, sys
 import datParser as ConfigParser
-import Image, ImageDraw
+from PIL import Image, ImageDraw
 import NIFToPoly, Tiler, dempak, Util
 
 #
@@ -260,7 +260,7 @@ class MissingNIF:
         """Warns of missing NIF file and flags warning.
         """
         if not self.warned:
-            print "warning: use of missing NIF " + self.file
+            print("warning: use of missing NIF " + self.file)
             self.warned = 1
 
 
@@ -312,7 +312,7 @@ def findtheStupidNPKfile(zone, file):
             break
 
     if not os.path.exists(npkpath):
-        print 'Did not find NPK for %s' % file
+        print('Did not find NPK for %s' % file)
         
     return npkpath
 
@@ -343,14 +343,14 @@ def readPolys(zone, file):
     try:
         poly_mtime = os.stat(polypath)[stat.ST_MTIME];
         poly_ok = 1
-    except OSError, e:
+    except OSError as e:
         poly_mtime = 0
         poly_ok = 0
 
     try:
         npk_mtime = os.stat(npkpath)[stat.ST_MTIME]
         npk_ok = 1
-    except OSError, e:
+    except OSError as e:
         npk_mtime = 0
         npk_ok = 0
         
@@ -369,7 +369,7 @@ def readPolys(zone, file):
             try:
                 nodemap, first = NIFToPoly.load(nifdata)
             except:
-                print 'Could not load NIF %s from %s' % (file + '.nif', npkpath)
+                print('Could not load NIF %s from %s' % (file + '.nif', npkpath))
                 polylist = None
                 return polylist
             
@@ -387,7 +387,7 @@ def readPolys(zone, file):
     if not polylist and poly_ok:
         try:
             polylist = NIFToPoly.loadPolys(polypath)
-        except IOError, e:
+        except IOError as e:
             import traceback
             traceback.print_exc()
 
@@ -436,7 +436,7 @@ class FixtureRender(Tiler.Tiler):
             if match:
                 try:
                     id, file, nifext, color = match.groups()
-                except ValueError, inst:
+                except ValueError as inst:
                     sys.stderr.write( "ValueError: %s" % str(inst.args))
                     sys.stderr.write( match.groups())
                     continue;
@@ -501,10 +501,10 @@ class FixtureRender(Tiler.Tiler):
                             self.nifmap[id] = ShadedNIF(color, polylist, layer, lv, lmin, lmax)
                             break
                         else:
-                            raise RuntimeError, 'unknown NIF type: ' + type
+                            raise RuntimeError('unknown NIF type: ' + type)
                     elif (self.name=='trees') and (firstpass > 0):
                         try:
-                            print 'Checking for alternate tree to %s' % file
+                            print('Checking for alternate tree to %s' % file)
                             file = self.zone.settings.get(variant,'defaulttree')
                             continue        
                         except ConfigParser.NoOptionError:
@@ -530,9 +530,9 @@ class FixtureRender(Tiler.Tiler):
                 nifId = int(match.group(1))
                 try:
                     nif = self.nifmap[nifId]
-                except KeyError, inst:
-                    print "KeyError:", inst.args
-                    print "    from fixtures.csv: " + l
+                except KeyError as inst:
+                    print("KeyError:", inst.args)
+                    print("    from fixtures.csv: " + l)
                     continue
                 
                 if not nif: continue
@@ -618,9 +618,9 @@ class FixtureRender(Tiler.Tiler):
                     try:
                         map_z = heightmap.getpixel(map_pt) - self.minheight
                     except IndexError:
-                        print 'x,y = (%d,%d) map_pt = (%d,%d); minpt=(%d,%d); maxpt=(%d,%d)' \
+                        print('x,y = (%d,%d) map_pt = (%d,%d); minpt=(%d,%d); maxpt=(%d,%d)' \
                               % (x,y,map_pt[0],map_pt[1],
-                                 minpt[0],minpt[1],maxpt[0],maxpt[1])
+                                 minpt[0],minpt[1],maxpt[0],maxpt[1]))
                         
                     # Use the highest point of terrain    
                     terr_z = max(map_z,z)

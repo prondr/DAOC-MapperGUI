@@ -43,7 +43,8 @@
 #                       inside instead of the outside.
 
 import Tiler
-import Image, ImageDraw, re
+from PIL import Image, ImageDraw
+import re
 import datParser as ConfigParser
 
 class BoundsRender(Tiler.Tiler):

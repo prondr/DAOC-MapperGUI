@@ -1,4 +1,3 @@
-
 import sys
 import string
 import re
@@ -100,7 +99,7 @@ class ConfigParser:
     def sections(self):
         """Return a list of section names, excluding [DEFAULT]"""
         # self.__sections will never have [DEFAULT] in it
-        return self.__sections.keys()
+        return list(self.__sections.keys())
 
     def add_section(self, section):
         """Create a new section in the configuration.
@@ -108,7 +107,7 @@ class ConfigParser:
         Raise DuplicateSectionError if a section by the specified name
         already exists.
         """
-        if self.__sections.has_key(section):
+        if section in self.__sections:
             raise DuplicateSectionError(section)
         self.__sections[section] = {}
 
@@ -126,9 +125,9 @@ class ConfigParser:
         except KeyError:
             raise NoSectionError(section)
         opts.update(self.__defaults)
-        if opts.has_key('__name__'):
+        if '__name__' in opts:
             del opts['__name__']
-        return opts.keys()
+        return list(opts.keys())
 
     def has_option(self, section, option):
         """Return whether the given section has the given option."""
@@ -144,7 +143,7 @@ class ConfigParser:
         configuration files in the list will be read.  A single
         filename may also be given.
         """
-        if type(filenames) in [type(''), type(u'')]:
+        if type(filenames) in [type(''), type('')]:
             filenames = [filenames]
         for filename in filenames:
             try:
@@ -210,7 +209,7 @@ class ConfigParser:
             if value.find("%(") >= 0:
                 try:
                     value = value % d
-                except KeyError, key:
+                except KeyError as key:
                     raise InterpolationError(key, option, section, rawval)
             else:
                 break
@@ -244,12 +243,12 @@ class ConfigParser:
     def has_option(self, section, option):
         """Check for the existence of a given option in a given section."""
         if not section or section == "DEFAULT":
-            return self.__defaults.has_key(option)
+            return option in self.__defaults
         elif not self.has_section(section):
             return 0
         else:
             option = self.optionxform(option)
-            return self.__sections[section].has_key(option)
+            return option in self.__sections[section]
 
     def set(self, section, option, value):
         """Set an option."""
@@ -267,13 +266,13 @@ class ConfigParser:
         """Write an .ini-format representation of the configuration state."""
         if self.__defaults:
             fp.write("[DEFAULT]\n")
-            for (key, value) in self.__defaults.items():
+            for (key, value) in list(self.__defaults.items()):
                 fp.write("%s = %s\n" % (key, value))
             fp.write("\n")
         for section in self.sections():
             fp.write("[" + section + "]\n")
             sectdict = self.__sections[section]
-            for (key, value) in sectdict.items():
+            for (key, value) in list(sectdict.items()):
                 if key == "__name__":
                     continue
                 fp.write("%s = %s\n" % (key, value))
@@ -289,14 +288,14 @@ class ConfigParser:
             except KeyError:
                 raise NoSectionError(section)
         option = self.optionxform(option)
-        existed = sectdict.has_key(option)
+        existed = option in sectdict
         if existed:
             del sectdict[option]
         return existed
 
     def remove_section(self, section):
         """Remove a file section."""
-        if self.__sections.has_key(section):
+        if section in self.__sections:
             del self.__sections[section]
             return 1
         else:
@@ -344,8 +343,8 @@ class ConfigParser:
                 continue
             #if line.strip() == 'Neutral Dungeon': # sloppy in know but blame Mythic!
             #    continue
-            if string.find(line.strip(), "=") == -1 and string.find(line.strip(), "[") == -1 and string.find(line.strip(), "]") == -1: # This is a little better  :)
-	        continue
+            if str.find(line.strip(), "=") == -1 and str.find(line.strip(), "[") == -1 and str.find(line.strip(), "]") == -1: # This is a little better  :)
+                continue
             if line.split()[0].lower() == 'rem' \
                and line[0] in "rR":      # no leading whitespace
                 continue
@@ -360,7 +359,7 @@ class ConfigParser:
                 mo = self.SECTCRE.match(line)
                 if mo:
                     sectname = mo.group('header')
-                    if self.__sections.has_key(sectname):
+                    if sectname in self.__sections:
                         cursect = self.__sections[sectname]
                     elif sectname == DEFAULTSECT:
                         cursect = self.__defaults
@@ -371,7 +370,7 @@ class ConfigParser:
                     optname = None
                 # no section header in the file?
                 elif cursect is None:
-                    raise MissingSectionHeaderError(fpname, lineno, `line`)
+                    raise MissingSectionHeaderError(fpname, lineno, repr(line))
                 # an option line?
                 else:
                     mo = self.OPTCRE.match(line)
@@ -395,22 +394,24 @@ class ConfigParser:
                         # list of all bogus lines
                         if not e:
                             e = ParsingError(fpname)
-                        e.append(lineno, `line`)
+                        e.append(lineno, repr(line))
         # if any parsing errors occurred, raise an exception
         if e:
             raise e
 
 
 if __name__ == '__main__':
-	
-	import sys
-	cp=ConfigParser()
-	try:
-		debugFile=open("DEBUG_INFO.txt", "r")
-		cp.readfp(debugFile)
-		debugFile.close()
-		raw_input("\n\nreturn to quit")
+    
+    import sys
+    cp=ConfigParser()
+    try:
+        debugFile=open("DEBUG_INFO.txt", "r")
+        cp.readfp(debugFile)
+        debugFile.close()
+        eval(input("\n\nreturn to quit"))
 
-	except:
-		print sys.exc_type, sys.exc_value
-		raw_input("\n\nreturn to quit")
+    except:
+        print((sys.exc_info()[0], sys.exc_info()[1]))
+        eval(input("\n\nreturn to quit"))
+
+

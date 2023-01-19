@@ -62,7 +62,7 @@ class Tiler:
         self.postRender()
 
     def renderTile(self, destimage, tile):
-        raise NotImplementedError, "renderTile"
+        raise NotImplementedError("renderTile")
 
     def postRender(self):
         pass

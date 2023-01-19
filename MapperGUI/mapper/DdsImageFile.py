@@ -34,8 +34,8 @@
 # The DTX1 texture format is described at:
 #  http://oss.sgi.com/projects/ogl-sample/registry/EXT/texture_compression_s3tc.txt
 
-import Image, ImageFile, struct, string
-
+import struct, string
+from PIL import Image, ImageFile
 dxt1Decoder = None
     
 # dwFlags constants
@@ -120,35 +120,35 @@ class DdsImageFile(ImageFile.ImageFile):
         # Check header
         header = self.fp.read(128)
         if header[:4] != 'DDS ':
-            raise SyntaxError, 'Not a DDS file'
+            raise SyntaxError('Not a DDS file')
 
         dwSize, dwFlags, dwHeight, dwWidth, dwPitchLinear, dwDepth, dwMipMapCount, ddpfPixelFormat, ddsCaps = struct.unpack('<IIIIIII 44x 32s 16s 4x', header[4:])
         self.size = dwWidth, dwHeight
 
         if dwSize != 124:
-            raise SyntaxError, 'Expected dwSize == 124, got %d' % dwSize
+            raise SyntaxError('Expected dwSize == 124, got %d' % dwSize)
 
         if (dwFlags & DDSD_EXPECTED) != DDSD_EXPECTED:
-            raise SyntaxError, 'Unsupported image flags: %08x' % dwFlags
+            raise SyntaxError('Unsupported image flags: %08x' % dwFlags)
         
         pf_dwSize, pf_dwFlags, pf_dwFourCC, pf_dwRGBBitCount, pf_dwRBitMask, pf_dwGBitMask, pf_dwBBitMask, pf_dwRGBAlphaBitMask = struct.unpack('<II4sIIIII', ddpfPixelFormat)
         if pf_dwSize != 32:
-            raise SyntaxError, 'Expected pf_dwSize == 32, got %d' % pf_dwSize
+            raise SyntaxError('Expected pf_dwSize == 32, got %d' % pf_dwSize)
 
         caps_dwCaps1, caps_dwCaps2 = struct.unpack('<II 8x', ddsCaps)
         if (caps_dwCaps1 & DDSCAPS_EXPECTED) != DDSCAPS_EXPECTED:
-            raise SyntaxError, 'Unsupported image caps: %08x' % caps_dwCaps1
+            raise SyntaxError('Unsupported image caps: %08x' % caps_dwCaps1)
 
         # check for DXT1
         if (pf_dwFlags & DDPF_FOURCC != 0):
             if pf_dwFourCC == 'DXT1':
                 if (pf_dwFlags & DDPF_ALPHAPIXELS != 0):
-                    raise SyntaxError, 'DXT1 with Alpha not supported' # yet
+                    raise SyntaxError('DXT1 with Alpha not supported') # yet
                 else:
                     self.mode = 'RGB'
                     self.load = self._loadDXTOpaque
             else:
-                raise SyntaxError, 'Unsupported FOURCC mode: %s' % pf_dwFourCC
+                raise SyntaxError('Unsupported FOURCC mode: %s' % pf_dwFourCC)
         else:
             # XXX is this right? I don't have an uncompressed dds to play with
             self.mode = 'RGB'
@@ -167,8 +167,8 @@ class DdsImageFile(ImageFile.ImageFile):
                 import _dxt1
                 dxt1Decoder = _dxt1.decodeDXT1
             except ImportError:
-                print "WARNING: Failed to import _dxt1 module."
-                print "WARNING: I'll use the slow python-based decoder instead."
+                print("WARNING: Failed to import _dxt1 module.")
+                print("WARNING: I'll use the slow python-based decoder instead.")
                 dxt1Decoder = pythonDecodeDXT1
 
         # one entry per Y row, we join them up at the end

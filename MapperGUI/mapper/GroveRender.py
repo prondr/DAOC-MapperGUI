@@ -17,7 +17,7 @@
 
 import re, math, os, stat, sys
 import datParser as ConfigParser
-import Image, ImageDraw
+from PIL import Image, ImageDraw
 import NIFToPoly, Tiler, dempak, Util, FixtureRender
 
 class GroveShadedNIF(FixtureRender.ShadedNIF):
@@ -53,7 +53,7 @@ class MissingMPK:
     
     def draw(self, zone, canvas, ox, oy, a, mag):
         if not self.warned:
-            print "warning: use of missing grove MPK " + self.file
+            print("warning: use of missing grove MPK " + self.file)
             self.warned = 1
 
 def findtheMPKfile(zone, file):
@@ -132,7 +132,7 @@ class GroveRender(Tiler.Tiler):
             niffile = match.group(1)
             self.tree_coords = GroveRender._re_TreeTuple.findall(l)
         else:
-            print "Couldn't read NIF name in %s: %s" % (csvfile+'.csv', l)
+            print("Couldn't read NIF name in %s: %s" % (csvfile+'.csv', l))
             
         datafile.close()
         mpk.close()
@@ -155,7 +155,7 @@ class GroveRender(Tiler.Tiler):
             if match:
                 try:
                     id, file, nifext, color = match.groups()
-                except ValueError, inst:
+                except ValueError as inst:
                     sys.stderr.write( "ValueError: %s" % str(inst.args))
                     sys.stderr.write( match.groups())
                     continue;
@@ -228,7 +228,7 @@ class GroveRender(Tiler.Tiler):
                         self.nifmap[id] = GroveShadedNIF(color, polylist, layer, lv,
                                                          lmin, lmax, self.tree_coords)
                     else:
-                        raise RuntimeError, 'unknown NIF type: ' + type
+                        raise RuntimeError('unknown NIF type: ' + type)
                 else:
                     self.nifmap[id] = FixtureRender.MissingNIF(file)
 
@@ -245,9 +245,10 @@ class GroveRender(Tiler.Tiler):
                 nifId = int(match.group(1))
                 try:
                     nif = self.nifmap[nifId]
-                except KeyError, inst:
-                    print "KeyError:", inst.args
-                    print "    from fixtures.csv: " + l
+                except KeyError as inst:
+                    print("KeyError:", inst.args)
+                    print("    from fixtures.csv: " + l)
+
                     continue
                 
                 if not nif: continue

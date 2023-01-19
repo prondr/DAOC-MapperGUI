@@ -240,7 +240,7 @@ class NiNode(Node):
             return 0
         #for nrelickkeep set collidee and unset visible    
         if len(self.name) >= 7 and self.name[:7] == 'visible':
-            return 01
+            return 0o1
         return 1
 
 # just do this for the name
@@ -553,7 +553,7 @@ def load(data):
     if verbose >0 :
       offset = 0
       while (offset < len(filesig)+10) and (data[offset:offset+1] > str('\x1f')) :  offset += 1
-      print "%s" % data[:offset] 
+      print("%s" % data[:offset]) 
       
     check = data[:len(filesig)]
     if check == filesig2[:len(filesig)]: 
@@ -563,7 +563,7 @@ def load(data):
     if (check != filesig ) and ( format == 3 ):
         #check = data[:len(filesig1)]
         #if check != filesig1 :
-        raise error, "unsupported file format"
+        raise error("unsupported file format")
     offset = len (data)
     if verbose > 1 : print >>sys.stderr,  "taille fichier %08x" % offset
     offset = 0
@@ -618,9 +618,9 @@ def savePolys(polylist, outfile):
     try:
    #     f.write(struct.pack('H', count))
          f.write(struct.pack('L',count))    # change to unsigned long
-    except struct.error, inst:
-        print inst,
-        print "count = %d" % count
+    except struct.error as inst:
+        print(inst, end=' ')
+        print("count = %d" % count)
         raise
     for poly in polylist:
         if len(poly) == 3:
@@ -860,7 +860,7 @@ def savePolysPovray(polylist, outfile, basename):
 def run(argv):
     mode = 'bin'
     if len(argv) < 2:
-        print "Usage: %s [-text | -poly | -dump | -draw | -shade | -dxf | -obj | -povray | -dxfs] file.nif ..." % argv[0]
+        print("Usage: %s [-text | -poly | -dump | -draw | -shade | -dxf | -obj | -povray | -dxfs] file.nif ..." % argv[0])
         return 1
     
     for f in argv[1:]:
@@ -875,8 +875,8 @@ def run(argv):
         elif f == '-povray': mode = 'povray'
         elif f == '-test': mode = 'test'
         else:
-            print >>sys.stderr, "Processing", f, "..."
-            if verbose>0 : print "%s" % f
+            print("Processing", f, "...", file=sys.stderr)
+            if verbose>0 : print("%s" % f)
             head, tail = os.path.split(f)
             tail = tail[:-4]
         
@@ -884,57 +884,57 @@ def run(argv):
             data = inf.read()
             inf.close()
             
-            print >>sys.stderr, "Loading data ..."
+            print("Loading data ...", file=sys.stderr)
             nodemap, first = load(data)
             
             if not nodemap.has_key(first):
-                raise error, "No root node found - urk!"
+                raise error("No root node found - urk!")
             elif mode == 'dump':
                 outfile = tail + ".dump.txt"
-                print "Saving", outfile, "(scenegraph dump)"
+                print("Saving", outfile, "(scenegraph dump)")
                 outdump = open(outfile, 'w')
                 dump(first, nodemap, outdump)
                 outdump.close()
             elif mode =='test':
                 outfile = tail +".dxf"
-                print "wrinting dxf file ......."
+                print("wrinting dxf file .......")
                 test(first, nodemap, outfile)
-                print "done %s ." % outfile 
+                print("done %s ." % outfile) 
             else:
-                print "Building polylist ..."
+                print("Building polylist ...")
                 polylist = nodemap[first].poly(nodemap, null_xform)
 
                 if mode == 'draw':
                     outfile = tail + ".png"
-                    print "Saving", outfile, "(image)"    
+                    print("Saving", outfile, "(image)")    
                     drawImage(polylist, outfile)
                 elif mode == 'shade':
                     outfile = tail + "-shaded.png"
-                    print "Saving", outfile, "(flat-shaded image)"    
+                    print("Saving", outfile, "(flat-shaded image)")    
                     drawShaded(polylist, outfile)
                 elif mode == 'bin':
                     outfile = tail + ".poly"
-                    print "Saving", outfile, "(polys)"
+                    print("Saving", outfile, "(polys)")
                     savePolys(polylist, outfile)
                 elif mode == 'text':
                     outfile = tail + ".poly.txt"
-                    print "Saving", outfile, "(polys as text)"
+                    print("Saving", outfile, "(polys as text)")
                     savePolysText(polylist, outfile)
                 elif mode == 'dxf':
                     outfile = tail + ".dxf"
-                    print "Saving", outfile, "(polys as dxf)"
+                    print("Saving", outfile, "(polys as dxf)")
                     savePolysDxf(polylist, outfile)
                 elif mode == 'dxfs':
                      outfile = tail + ".dxfs"
-                     print "Saving", outfile, "(polys as dxf without header)"
+                     print("Saving", outfile, "(polys as dxf without header)")
                      savePolysDxfShort(polylist, outfile, tail)    
                 elif mode == 'obj':
                     outfile = tail + ".obj"
-                    print "Saving", outfile, "(polys as obj)"
+                    print("Saving", outfile, "(polys as obj)")
                     savePolysObj(polylist, outfile)
                 elif mode == 'povray':
                     outfile = tail + ".pov"
-                    print "Saving", outfile, "(polys as povray mesh)"
+                    print("Saving", outfile, "(polys as povray mesh)")
                     savePolysPovray(polylist, outfile, tail)
 
     return 0

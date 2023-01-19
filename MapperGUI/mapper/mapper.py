@@ -31,20 +31,19 @@
 import datParser as ConfigParser
 
 try:
-    import gc, Image, ImageFont, ImageDraw
-except ImportError, e:
-    print "** Could not import PIL modules -- check PIL is installed **"
-    print
+    from PIL import Image, ImageFont, ImageDraw
+    import gc
+except ImportError as e:
+    print("** Could not import PIL modules -- check PIL is installed **")
+    print()
     raise
 
 try:
-    import dempak, Zone, BumpmapRender, FixtureRender, ContourRender,\
-           BackgroundRender, RiverRender, SolidRender, BoundsRender, \
-           GridRender, CaptionRender, GroveRender
+    import dempak, Zone, BumpmapRender, FixtureRender, ContourRender, BackgroundRender, RiverRender, SolidRender, BoundsRender, GridRender, CaptionRender, GroveRender
     
-except ImportError, e:
-    print "** Could not import mapper support modules -- check your PYTHONPATH **"
-    print
+except ImportError as e:
+    print("** Could not import mapper support modules -- check your PYTHONPATH **")
+    print()
     raise
 
 #     module mapping render_map
@@ -92,11 +91,11 @@ def loadRenderers(settings):
 
     namelist = settings.get('maps', 'renderers')
 
-    names = map(lambda x: x.strip().lower(), namelist.split(','))
+    names = [x.strip().lower() for x in namelist.split(',')]
     for name in names:
         type = settings.get(name, 'type').strip().lower()
-        if not render_map.has_key(type):
-            raise ConfigParser.Error, 'Unknown type "%s" for renderer "%s"' % (type, name)
+        if type not in render_map:
+            raise ConfigParser.Error('Unknown type "%s" for renderer "%s"' % (type, name))
 
         renderers.append((name, render_map[type]))
 
@@ -153,7 +152,7 @@ def run(argv):
     location = None
     zoneID = None
 
-    print 'mapper.py v.2.4'
+    print('mapper.py v.2.4')
     i = 1
     while i < len(argv):
         if argv[i] == '-settings':
@@ -169,7 +168,7 @@ def run(argv):
         elif argv[i] == '-scale':
             try: scale = int(argv[i+1])
             except (ValueError,IndexError):
-                print '-scale must be followed by a number'
+                print('-scale must be followed by a number')
                 return 1
             i += 1
         elif argv[i] == '-location':
@@ -179,14 +178,14 @@ def run(argv):
             try:
                 region = (int(argv[i+1]),int(argv[i+2]),int(argv[i+3]),int(argv[i+4]))
             except (ValueError,IndexError):
-                print '-region must be followed by four numbers'
+                print('-region must be followed by four numbers')
                 return 1                
             i += 4
         elif argv[i] == '-zone':
             try:
                 zoneID = int(argv[i+1])
             except (ValueError,IndexError):
-                print '-zone must be followed by a number'
+                print('-zone must be followed by a number')
                 return 1
             i += 1
         elif argv[i] == '-out':
@@ -196,30 +195,30 @@ def run(argv):
             settings.set('maps', 'renderers', argv[i+1])
             i += 1
         else:
-            print "unknown option:", argv[i]
+            print("unknown option:", argv[i])
             return 1
 
         i += 1
     
     if not outpath:
-        print "Please give an output filename (via -out <filename>)"
+        print("Please give an output filename (via -out <filename>)")
         return 1
 
     if not settings.has_section('maps'):
-        print "No maps section found (did you specify -settings?)"
+        print("No maps section found (did you specify -settings?)")
         return 1
     
     if location:
         lstr = settings.get('locations', location).split(',')
         zoneID = int(lstr[0])
-        region = map(int,lstr[1:])
+        region = list(map(int,lstr[1:]))
 
     if zoneID is None:
-        print "Please specify either -zone <zoneID> or -location <location>"
+        print("Please specify either -zone <zoneID> or -location <location>")
         return 1
 
     if region[0] < 0 or region[2] > 65536 or region[0] >= region[2] or region[1] < 0 or region[3] > 65536 or region[1] >= region[3]:
-        print "Bad region " + `region` + ": must be 0..65536 in both dimensions"
+        print("Bad region " + repr(region) + ": must be 0..65536 in both dimensions")
         return 1
         
     imgregion = (scale * region[0] / 65536,
@@ -232,7 +231,7 @@ def run(argv):
     zone = Zone.Zone(settings, zoneID, scale, imgregion[:2])
 
     imagesize = (imgregion[2] - imgregion[0], imgregion[3] - imgregion[1])
-    print 'Mapping zone %d: %s to %s (%dx%d)' % (zoneID, `region`, outpath, imagesize[0], imagesize[1])
+    print('Mapping zone %d: %s to %s (%dx%d)' % (zoneID, repr(region), outpath, imagesize[0], imagesize[1]))
     zone.progress('Creating work area', 0.0)
 
     if zone.greyscale:
@@ -259,8 +258,8 @@ if __name__ == '__main__':
     import sys
     try:
         sys.exit(run(sys.argv))
-    except ConfigParser.Error, e:
-        print "Configuration error: " + `e`
+    except ConfigParser.Error as e:
+        print("Configuration error: " + repr(e))
         sys.exit(2)
     
 # Change History:
@@ -301,3 +300,4 @@ if __name__ == '__main__':
 # 25/3/2002 G. Willoughby <sab@freeuk.com>
 # lines 55-64 added black border
 # line 147: added '"JPEG", quality=100' to the save method
+

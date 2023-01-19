@@ -29,7 +29,7 @@
 # Settings options:
 #  color: the color to fill the image with
 
-import ImageDraw
+from PIL import ImageDraw
 
 class SolidRender:
     def __init__(self, zone, name):

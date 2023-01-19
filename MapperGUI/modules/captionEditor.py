@@ -29,8 +29,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from Tkinter import *
-import tkMessageBox
+from tkinter import *
+import tkinter.messagebox
 from tkinterAboutBox import AboutBox
 from helpViewer import HelpDialog
 # import string, win32api, os
@@ -165,10 +165,10 @@ class EditorMain:
 			self.textListEntry.focus_set()
 
 	def yview(self, *args):
-		apply(self.zoneList.yview, args)
-		apply(self.xCoordList.yview, args)
-		apply(self.yCoordList.yview, args)
-		apply(self.textList.yview, args)
+		self.zoneList.yview(*args)
+		self.xCoordList.yview(*args)
+		self.yCoordList.yview(*args)
+		self.textList.yview(*args)
 
 #	def albionChecked(self):
 #		self.hiberniaToggleVar.set(0)
@@ -324,7 +324,7 @@ class EditorMain:
 	def deleteEntry(self):
 		if self.selected=="True":
 			## CCH - replaced win32-specific MessageBox with generic tkMessageBox
-			if tkMessageBox.askyesno("Delete", "Are you sure you want to remove this entry?", parent=self.master):
+			if tkinter.messagebox.askyesno("Delete", "Are you sure you want to remove this entry?", parent=self.master):
 				
 ## 			if win32api.MessageBox(0,"Are you sure you want to remove this entry?", "Delete", 1, 0) == 1:
 				self.zoneList.delete(self.textList.index(ACTIVE))
@@ -379,3 +379,4 @@ if __name__ == '__main__':
 	os.chdir("..")
 	app=EditorMain()
 	root.mainloop()
+

@@ -29,7 +29,8 @@
 
 # Settings options: none
 
-import os, Image, ImageFilter
+import os
+from PIL import Image, ImageFilter
 import dempak, Tiler, DdsImageFile
 import datParser as ConfigParser
 import re
@@ -83,7 +84,7 @@ class BackgroundRender(Tiler.Tiler):
         # modified for handling housing zones
         try: 
            tx = zone.sector_dat.get('terrain', 'flip_x')
-           print tx
+           print (tx)
            if  (tx == '1') or (tx =='-1'):
               self.flip_x = True 
            else: 
@@ -92,7 +93,7 @@ class BackgroundRender(Tiler.Tiler):
         
         try: 
           ty = zone.sector_dat.get('terrain', 'flip_y')
-          print ty
+          print (ty)
           if ty == '1' or ty =='-1' :
             self.flip_y = True
           else :
@@ -110,7 +111,7 @@ class BackgroundRender(Tiler.Tiler):
             self.texfile.open('tex00-00.dds').close()
             sourcesize = 512
             usedds = 1
-        except IOError, e:
+        except IOError as e:
             sourcesize = 256
             usedds = 0
 
@@ -220,7 +221,7 @@ class BackgroundRender(Tiler.Tiler):
         try:
             fn, sourcesize, numtiles = texture_map[self.zoneID]
         except KeyError:
-            print 'Zone %d not in texture_map' % self.zoneID
+            print('Zone %d not in texture_map' % self.zoneID)
             raise
         else:
             fn += '.dds'

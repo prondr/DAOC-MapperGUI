@@ -28,20 +28,20 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Updated: 2002/01/26
+# Updated: 2023/01/18
 
 # This module is both importable and directly runnable.
 
 """Dark Age of Camelot .npk/.mpk archive extraction module."""
 
 import zlib, struct, weakref, string
-from cStringIO import StringIO
+from io import StringIO
 
 class error(IOError): pass
 
 _test = zlib.decompressobj()
 if not hasattr(_test, 'unused_data'):
-    raise error, 'Update your Python: this zlib module is too old'
+    raise error('Update your Python: this zlib module is too old')
 del _test
 
 def _readstream(f):
@@ -61,7 +61,7 @@ the end of the stream on return. Returns the decompressed stream data.
             
             output += do.decompress('x')
             if do.unused_data == '':
-                raise error, 'unexpected end of stream'
+                raise error('unexpected end of stream')
             else:
                 f.seek(1 - len(do.unused_data), 1)
                 return output
@@ -69,7 +69,7 @@ the end of the stream on return. Returns the decompressed stream data.
             output += do.decompress(str)
         except MemoryError:
             del output
-            raise error, "File too large"
+            raise error("File too large")
             return ''
                 
     f.seek(0 - len(do.unused_data), 1)
@@ -90,7 +90,7 @@ Throws dempak.error or IOError on errors.
 
         # check signature
         if self.f.read(4) != 'MPAK':
-            raise error, 'not a MPAK archive'
+            raise error('not a MPAK archive')
 
         self.f.seek(21)
 
@@ -125,11 +125,11 @@ Return a file-like object for the archive entry 'entry'.
 Throws dempak.error or IOError on errors.
 """
         if not self.f:
-            raise error, 'file is closed'
+            raise error('file is closed')
 
         entry = entry.lower()
-        if not self.directory.has_key(entry):
-            raise error, 'unknown entry: ' + entry
+        if entry not in self.directory:
+            raise error('unknown entry: ' + entry)
 
         self.f.seek(self.directory[entry])
         data = _readstream(self.f)
@@ -149,7 +149,7 @@ Throws dempak.error or IOError on errors."""
     
     global _filecache
 
-    if not _filecache.has_key(path):
+    if path not in _filecache:
         _filecache[path] = MPAKFile(path)
 
     return _filecache[path].open(entry)
@@ -158,7 +158,7 @@ def run():
     import sys, os
 
     if len(sys.argv) != 2:
-        print >>sys.stderr, "Usage: %s <path to .mpk/.npk>" % sys.argv[0]
+        print("Usage: %s <path to .mpk/.npk>" % sys.argv[0], file=sys.stderr)
         sys.exit(1)
 
     name = sys.argv[1]
@@ -170,7 +170,7 @@ def run():
     
     for e in f.entries:
         outpath = os.path.join(base, e)
-        print >>sys.stderr, "Extracting", e, "=>", outpath,
+        print("Extracting", e, "=>", outpath, end=' ', file=sys.stderr)
         
         infile = f.open(e)
         data = infile.read()
@@ -180,7 +180,7 @@ def run():
         outfile.write(data)
         outfile.close()
 
-        print >>sys.stderr, "(" + `len(data)` + " bytes)"
+        print("(" + repr(len(data)) + " bytes)", file=sys.stderr)
 
     f.close()
     sys.exit(0)
@@ -188,5 +188,7 @@ def run():
 if __name__ == '__main__': run()
 
 # Changelog:
+# 
+#   18-Jan-2023: Converted to Python 3
 #   26-Jan-2002: Initial version. Requires Python 2.1 for
 #                the more recent zlib module.

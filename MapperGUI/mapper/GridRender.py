@@ -34,7 +34,7 @@
 #  fontcolor: if font is set, draw coordinate labels in this color
 
 import Tiler
-import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont
 import datParser as ConfigParser
 
 class GridRender(Tiler.Tiler):

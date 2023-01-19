@@ -27,7 +27,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import re, Image, ImageDraw
+import re
+from PIL import Image, ImageDraw
 import datParser as ConfigParser
 import Tiler
 
@@ -64,8 +65,8 @@ class RiverRender(Tiler.Tiler):
         for s in sd.sections():
             if s[:5] == 'river':
                 try: count = sd.getint(s, 'bankpoints')
-                except ConfigParser.NoOptionError, e: count = 0
-                except ValueError, e: count = 0
+                except ConfigParser.NoOptionError as e: count = 0
+                except ValueError as e: count = 0
 
                 if not count: continue
                                     
@@ -108,7 +109,7 @@ class RiverRender(Tiler.Tiler):
                 try:
                     color = int(sd.get(s, 'color'))                
                     color = (color % 256, (color / 256) % 256, color / 65536)
-                except ConfigParser.NoOptionError, e:
+                except ConfigParser.NoOptionError as e:
                     color = (0,0,255)
                     
                 color = self.zone.getColor(self.name, 'color', color)

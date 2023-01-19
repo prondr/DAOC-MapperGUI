@@ -32,7 +32,7 @@
 #   source: name of the section containing caption info. This should contain
 #        options of the form 'zoneID,x,y = caption text'
 
-import ImageDraw, ImageFont
+from PIL import ImageDraw, ImageFont
 
 class CaptionRender:
     def __init__(self, zone, name):
